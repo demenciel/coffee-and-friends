@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Coffee and Friends | Fredericton</title>
 <meta name="description" content="Family-owned coffee shop at 415 King Street in downtown Fredericton. House-roasted coffee, the Nutella latte, paninis, a patio and a quiet room.">
-<meta name="theme-color" content="#4A1C17">
+<meta name="theme-color" content="#36130F">
 <meta property="og:title" content="Coffee and Friends | Fredericton">
 <meta property="og:description" content="House-roasted coffee, red chairs on the patio and a quiet room on King Street.">
 <meta property="og:type" content="website">
@@ -21,6 +21,7 @@
   "address": {"@type": "PostalAddress", "streetAddress": "415 King Street", "addressLocality": "Fredericton", "addressRegion": "NB", "postalCode": "E3B 1E5", "addressCountry": "CA"},
   "telephone": "+1-506-455-4554",
   "servesCuisine": ["Coffee", "Sandwiches", "Breakfast"],
+  "sameAs": ["https://www.facebook.com/pages/Coffee-And-Friends/175521545839236", "https://www.yelp.ca/biz/coffee-and-friends-fredericton"],
   "openingHoursSpecification": [
     {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:30", "closes": "16:30"},
     {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "16:00"}
@@ -34,10 +35,8 @@
   --awning: #E2CFA3;
   --awning-soft: #EFE3C6;
   --slate: #1E2522;
-  --slate-soft: #2A332F;
   --red: #C8302B;
   --red-deep: #9E221E;
-  --green: #5E7C58;
   --chalk: #F0EBDD;
   --ink: #241A14;
 
@@ -46,13 +45,14 @@
 
   --gutter: clamp(20px, 5vw, 64px);
   --max: 1180px;
+  --header-h: 68px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--brick);
+  background: var(--brick-deep);
   color: var(--chalk);
   font-family: var(--body);
   font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.25rem);
@@ -63,52 +63,38 @@ img, svg { display: block; max-width: 100%; }
 a { color: inherit; }
 p { margin: 0; }
 h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-height: 1.02; letter-spacing: -0.01em; }
+section[id] { scroll-margin-top: var(--header-h); }
 
 :focus-visible { outline: 3px solid var(--awning); outline-offset: 3px; border-radius: 4px; }
 .light :focus-visible { outline-color: var(--red-deep); }
 
 .skip {
-  position: absolute; left: 12px; top: -60px; z-index: 20;
+  position: absolute; left: 12px; top: -60px; z-index: 40;
   background: var(--awning); color: var(--ink); padding: 10px 16px; border-radius: 6px; text-decoration: none;
 }
 .skip:focus { top: 12px; }
 
 .wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.section-pad { padding-block: clamp(64px, 9vw, 120px); }
+.h-xl { font-size: clamp(2.3rem, 5.4vw, 4.2rem); text-wrap: balance; }
 
-/* ---------- Top bar ---------- */
-.bar {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding-block: 20px;
+/* ---------- Sticky header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(54, 19, 15, .94);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(240,235,221,.12);
 }
-.mark { font-family: var(--display); font-size: 1.35rem; text-decoration: none; color: var(--awning); line-height: 1; }
-.status {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 0.95rem; font-weight: 500; color: var(--chalk);
-}
+.bar { display: flex; align-items: center; gap: 12px 28px; min-height: var(--header-h); flex-wrap: wrap; }
+.mark { font-family: var(--display); font-size: 1.35rem; text-decoration: none; color: var(--awning); line-height: 1; margin-right: auto; padding-block: 12px; }
+.nav { display: flex; gap: 6px 26px; font-weight: 500; font-size: 1rem; }
+.nav a { text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { border-bottom-color: var(--red); }
+.status { display: inline-flex; align-items: center; gap: 10px; font-size: .95rem; font-weight: 500; }
 .dot { width: 10px; height: 10px; border-radius: 50%; background: #8C8A80; flex: none; }
 .status[data-open="true"] .dot { background: #7DBB74; box-shadow: 0 0 0 4px rgba(125,187,116,.22); }
 
-/* ---------- Hero ---------- */
-.hero {
-  background-color: var(--brick);
-  background-image:
-    radial-gradient(120% 90% at 78% 40%, rgba(255,190,120,.16), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64'%3E%3Cg fill='none' stroke='%23000' stroke-opacity='.22' stroke-width='2'%3E%3Cpath d='M0 1h96M0 33h96M0 65h96'/%3E%3Cpath d='M0 1v32M48 33v32M96 1v32'/%3E%3C/g%3E%3C/svg%3E");
-  padding-bottom: clamp(56px, 9vw, 120px);
-}
-.hero-grid {
-  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  align-items: center; gap: clamp(32px, 6vw, 88px);
-  padding-top: clamp(24px, 5vw, 64px);
-}
-.hero h1 {
-  font-size: clamp(3.2rem, 9.2vw, 7.6rem);
-  color: var(--awning);
-  text-wrap: balance;
-}
-.hero-lede { margin-top: 28px; max-width: 30em; font-size: 1.2em; color: var(--chalk); }
-.hero-cta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
-
+/* ---------- Buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; min-height: 48px;
   padding: 10px 24px; border-radius: 999px;
@@ -121,6 +107,23 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-heig
 .btn-line:hover { background: rgba(240,235,221,.1); }
 .light .btn-line { border-color: rgba(36,26,20,.5); color: var(--ink); }
 .light .btn-line:hover { background: rgba(36,26,20,.06); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  background-color: var(--brick);
+  background-image:
+    radial-gradient(120% 90% at 78% 40%, rgba(255,190,120,.16), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64'%3E%3Cg fill='none' stroke='%23000' stroke-opacity='.22' stroke-width='2'%3E%3Cpath d='M0 1h96M0 33h96M0 65h96'/%3E%3Cpath d='M0 1v32M48 33v32M96 1v32'/%3E%3C/g%3E%3C/svg%3E");
+  padding-block: clamp(40px, 7vw, 96px) clamp(48px, 8vw, 104px);
+}
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  align-items: center; gap: clamp(32px, 6vw, 88px);
+}
+.hero h1 { font-size: clamp(3.2rem, 9.2vw, 7.6rem); color: var(--awning); text-wrap: balance; }
+.hero-lede { margin-top: 28px; max-width: 30em; font-size: 1.2em; }
+.hero .cta-row { margin-top: 36px; }
 
 /* chalkboard sign */
 .sign {
@@ -136,15 +139,11 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-heig
   border-radius: 6px;
   padding: clamp(28px, 4vw, 44px) clamp(24px, 3.5vw, 40px);
   box-shadow: 0 30px 50px -20px rgba(0,0,0,.6), 0 4px 0 #0c100e;
-  color: var(--chalk);
 }
-.sign h2 { font-size: 1.9rem; color: var(--chalk); }
+.sign h2 { font-size: 1.9rem; }
 .sign-sub { margin-top: 6px; font-style: italic; color: rgba(240,235,221,.7); font-size: 1rem; }
 .sign ul { list-style: none; margin: 22px 0 0; padding: 0; }
-.sign li {
-  padding: 11px 0; border-bottom: 1px dashed rgba(240,235,221,.22);
-  font-size: 1.15rem; font-weight: 500;
-}
+.sign li { padding: 11px 0; border-bottom: 1px dashed rgba(240,235,221,.22); font-size: 1.15rem; font-weight: 500; }
 .sign li:last-child { border-bottom: 0; }
 .sign li small { display: block; font-size: .92rem; font-weight: 400; font-style: italic; color: rgba(240,235,221,.66); }
 
@@ -152,100 +151,133 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-heig
 @media (prefers-reduced-motion: no-preference) {
   .sign h2, .sign-sub, .sign li {
     clip-path: inset(0 100% 0 0);
-    animation: write 0.9s cubic-bezier(.5,.1,.3,1) forwards;
-    animation-delay: calc(0.5s + var(--i, 0) * 0.32s);
+    animation: write .9s cubic-bezier(.5,.1,.3,1) forwards;
+    animation-delay: calc(.5s + var(--i, 0) * .32s);
   }
   @keyframes write { to { clip-path: inset(0 -2px 0 0); } }
   .js .sign:not(.in) h2, .js .sign:not(.in) .sign-sub, .js .sign:not(.in) li { animation-play-state: paused; }
 }
 
-/* ---------- Room (awning) ---------- */
-.room { background: var(--awning); color: var(--ink); padding-block: clamp(64px, 9vw, 120px); }
-.room h2 { font-size: clamp(2.3rem, 5.4vw, 4.2rem); max-width: 14em; text-wrap: balance; }
-.storefront { margin-top: clamp(32px, 5vw, 56px); border-radius: 10px; overflow: hidden; }
-.notes {
-  margin-top: clamp(32px, 5vw, 56px);
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(24px, 3vw, 40px);
-}
-.note h3 { font-size: 1.5rem; color: var(--red-deep); }
-.note p { margin-top: 10px; font-size: 1.02rem; line-height: 1.55; }
-.pull {
-  margin: clamp(40px, 6vw, 72px) 0 0;
-  padding-top: 28px; border-top: 2px solid rgba(36,26,20,.18);
-  font-style: italic; font-size: clamp(1.2rem, 2vw, 1.5rem); max-width: 34em;
-}
-.pull cite { display: block; margin-top: 6px; font-size: .95rem; font-style: normal; opacity: .75; }
+/* ---------- Quick facts ---------- */
+.facts { background: var(--brick-deep); border-top: 1px solid rgba(240,235,221,.12); }
+.facts-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.fact { padding: 26px clamp(16px, 2vw, 28px); border-left: 1px solid rgba(240,235,221,.12); }
+.fact:first-child { border-left: 0; padding-left: 0; }
+.fact h2 { font-size: 1.15rem; color: var(--awning); }
+.fact p, .fact a { margin-top: 6px; font-size: 1rem; line-height: 1.45; display: block; }
+.fact a { text-underline-offset: 3px; }
 
-/* ---------- Menu (chalkboard) ---------- */
-.menu { background: var(--slate); padding-block: clamp(64px, 9vw, 120px); }
+/* ---------- Menu ---------- */
+.menu { background: var(--slate); }
 .menu-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; }
-.menu h2 { font-size: clamp(2.3rem, 5.4vw, 4.2rem); color: var(--chalk); }
 .menu-head p { max-width: 24em; color: rgba(240,235,221,.75); font-style: italic; }
-.menu-cols {
-  margin-top: clamp(32px, 5vw, 56px);
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px);
-}
+.menu-cols { margin-top: clamp(32px, 5vw, 56px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); }
 .menu-col h3 { font-size: 1.7rem; color: var(--awning); padding-bottom: 14px; border-bottom: 2px solid var(--red); }
 .menu-col ul { list-style: none; margin: 0; padding: 0; }
 .menu-col li { padding: 13px 0; border-bottom: 1px dashed rgba(240,235,221,.2); font-weight: 500; }
 .menu-col li span { display: block; font-weight: 400; font-style: italic; font-size: .95rem; color: rgba(240,235,221,.65); }
 
+/* ---------- Room ---------- */
+.room { background: var(--awning); color: var(--ink); }
+.room h2 { max-width: 14em; }
+.storefront { margin-top: clamp(32px, 5vw, 56px); border-radius: 10px; overflow: hidden; }
+.notes { margin-top: clamp(32px, 5vw, 56px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(24px, 3vw, 40px); }
+.note h3 { font-size: 1.5rem; color: var(--red-deep); }
+.note p { margin-top: 10px; font-size: 1.02rem; line-height: 1.55; }
+
+/* ---------- Reviews ---------- */
+.reviews { background: var(--brick); }
+.reviews-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; }
+.rating { color: var(--awning); font-weight: 600; }
+.stars { color: var(--awning); letter-spacing: .12em; font-size: 1.1rem; display: block; }
+.reviews-grid { margin-top: clamp(32px, 5vw, 56px); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.quote { margin: 0; }
+.quote blockquote { margin: 0; }
+.quote cite { display: block; margin-top: 14px; font-style: normal; font-size: .95rem; color: rgba(240,235,221,.72); }
+.quote-big blockquote { font-family: var(--display); font-size: clamp(1.9rem, 3.8vw, 3rem); line-height: 1.12; color: var(--chalk); text-wrap: balance; }
+.quote-big { border-left: 6px solid var(--red); padding-left: clamp(18px, 3vw, 32px); }
+.quote-list { display: grid; }
+.quote-list .quote { padding-block: 26px; border-top: 1px solid rgba(240,235,221,.2); }
+.quote-list .quote:first-child { padding-top: 0; border-top: 0; }
+.quote-list blockquote { font-style: italic; font-size: 1.2em; line-height: 1.45; }
+.more { margin-top: clamp(32px, 5vw, 56px); display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; }
+.more span { color: rgba(240,235,221,.72); }
+.more a { font-weight: 600; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+
 /* ---------- Visit ---------- */
-.visit { background: var(--awning-soft); color: var(--ink); padding-block: clamp(64px, 9vw, 120px); }
+.visit { background: var(--awning-soft); color: var(--ink); }
 .visit-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
-.visit h2 { font-size: clamp(2.3rem, 5.4vw, 4.2rem); }
 .addr { margin-top: 24px; font-size: 1.45em; line-height: 1.35; font-weight: 500; }
 .addr a { text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.visit-note { margin-top: 18px; max-width: 28em; }
-.visit .hero-cta { margin-top: 30px; }
+.visit .cta-row { margin-top: 30px; }
 .hours { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
-.hours li {
-  display: flex; justify-content: space-between; gap: 16px;
-  padding: 14px 12px; border-bottom: 1px solid rgba(36,26,20,.22); font-weight: 500;
-}
+.hours li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 12px; border-bottom: 1px solid rgba(36,26,20,.22); font-weight: 500; }
 .hours li[aria-current="date"] { background: var(--red); color: #fff; border-radius: 6px; border-bottom-color: transparent; }
 .hours-note { margin-top: 14px; font-size: .95rem; font-style: italic; opacity: .8; }
+.map { margin-top: clamp(36px, 5vw, 64px); border-radius: 10px; overflow: hidden; border: 2px solid var(--ink); background: var(--awning); }
+.map iframe { display: block; width: 100%; height: clamp(280px, 38vw, 400px); border: 0; }
 
 /* ---------- Footer ---------- */
-.foot { background: var(--brick-deep); color: rgba(240,235,221,.8); padding-block: 36px; font-size: .95rem; }
-.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; }
-.foot .mark { font-size: 1.15rem; }
+.foot { background: var(--slate); color: rgba(240,235,221,.85); padding-block: clamp(40px, 6vw, 72px) 32px; font-size: 1rem; }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) repeat(2, minmax(0, 1fr)); gap: 32px clamp(24px, 5vw, 80px); }
+.foot .mark { font-size: 1.6rem; margin: 0; padding: 0; display: inline-block; }
+.foot h2 { font-size: 1.15rem; color: var(--awning); }
+.foot ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 4px; }
+.foot ul a { display: inline-block; padding: 6px 0; text-underline-offset: 4px; }
+.foot-note { margin-top: 12px; max-width: 24em; }
+.foot-fine { margin-top: clamp(32px, 5vw, 56px); padding-top: 20px; border-top: 1px solid rgba(240,235,221,.14); font-size: .9rem; color: rgba(240,235,221,.6); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   .notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .menu-cols { grid-template-columns: 1fr; }
+  .facts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(3) { border-left: 0; padding-left: 0; }
+  .fact:nth-child(n+3) { border-top: 1px solid rgba(240,235,221,.12); }
 }
 @media (max-width: 800px) {
-  .hero-grid, .visit-grid { grid-template-columns: 1fr; }
+  .hero-grid, .visit-grid, .reviews-grid { grid-template-columns: 1fr; }
   .sign { justify-self: center; margin-top: 8px; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .bar { padding-block: 4px; }
+  .nav { order: 3; width: 100%; padding-bottom: 8px; gap: 4px 22px; }
 }
 @media (max-width: 520px) {
   .notes { grid-template-columns: 1fr; }
-  .bar .status span.long { display: none; }
+  .mark { font-size: 1.12rem; }
+  .status { font-size: .8rem; gap: 7px; }
+  .bar { gap: 0 10px; }
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#visit">Skip to hours and location</a>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="bar">
-      <a class="mark" href="#top" aria-label="Coffee and Friends, home">Coffee and Friends</a>
-      <p class="status" id="status" data-open="false" aria-live="polite">
-        <i class="dot" aria-hidden="true"></i>
-        <span id="status-text">Open Monday to Saturday</span>
-      </p>
-    </div>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="mark" href="#top" aria-label="Coffee and Friends, back to top">Coffee and Friends</a>
+    <p class="status" id="status" data-open="false" aria-live="polite">
+      <i class="dot" aria-hidden="true"></i>
+      <span id="status-text">Open Monday to Saturday</span>
+    </p>
+    <nav class="nav" aria-label="Main">
+      <a href="#menu">Menu</a>
+      <a href="#room">The room</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+    </nav>
+  </div>
+</header>
 
-    <div class="hero-grid" id="top">
+<main id="top">
+  <section class="hero" aria-label="Welcome">
+    <div class="wrap hero-grid">
       <div>
         <h1>Pull up a chair.</h1>
         <p class="hero-lede">A family-owned coffee shop on King Street. We roast our own beans, keep the room quiet, and leave the red chairs out front for whenever you have a minute.</p>
-        <div class="hero-cta">
-          <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Coffee+and+Friends+415+King+Street+Fredericton+NB" rel="noopener">Get directions</a>
-          <a class="btn btn-line" href="tel:+15064554554">Call (506) 455-4554</a>
+        <div class="cta-row">
+          <a class="btn btn-red" href="#menu">See the menu</a>
+          <a class="btn btn-line" href="#visit">Hours and directions</a>
         </div>
       </div>
 
@@ -261,129 +293,33 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-heig
         </ul>
       </aside>
     </div>
-  </div>
-</header>
+  </section>
 
-<main>
-  <section class="room light" aria-labelledby="room-h">
-    <div class="wrap">
-      <h2 id="room-h">A calm room in the middle of downtown.</h2>
-
-      <div class="storefront">
-        <svg viewBox="0 0 900 440" role="img" aria-labelledby="sf-t sf-d" xmlns="http://www.w3.org/2000/svg">
-          <title id="sf-t">The Coffee and Friends storefront</title>
-          <desc id="sf-d">Illustration of a brick storefront with a tan awning, a front door, a window with plants, and red chairs and a table on the patio.</desc>
-          <defs>
-            <pattern id="brick" width="48" height="32" patternUnits="userSpaceOnUse">
-              <rect width="48" height="32" fill="#7A3025"/>
-              <path d="M0 .5h48M0 16.5h48M0 32.5h48M0 .5v16M24 16.5v16M48 .5v16" stroke="#4A1C17" stroke-width="2" fill="none" opacity=".7"/>
-            </pattern>
-            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#3C2B22"/>
-              <stop offset="1" stop-color="#1D1511"/>
-            </linearGradient>
-            <radialGradient id="glow" cx=".5" cy=".4" r=".7">
-              <stop offset="0" stop-color="#F2B66A" stop-opacity=".75"/>
-              <stop offset="1" stop-color="#F2B66A" stop-opacity="0"/>
-            </radialGradient>
-            <symbol id="chair" viewBox="0 0 60 100">
-              <g fill="#C8302B" stroke="#C8302B" stroke-linecap="round">
-                <rect x="8" y="2" width="44" height="30" rx="14" stroke="none"/>
-                <rect x="8" y="2" width="44" height="30" rx="14" fill="none" stroke="#9E221E" stroke-width="2"/>
-                <rect x="4" y="44" width="52" height="10" rx="5" stroke="none"/>
-                <path d="M14 54 L8 98 M46 54 L52 98 M18 54 L16 98 M42 54 L44 98" fill="none" stroke-width="4"/>
-                <path d="M12 30 L10 44 M48 30 L50 44" fill="none" stroke-width="4"/>
-              </g>
-              <g stroke="#9E221E" stroke-width="2" fill="none"><path d="M22 6v22M30 6v22M38 6v22"/></g>
-            </symbol>
-          </defs>
-
-          <rect width="900" height="440" fill="url(#brick)"/>
-          <rect x="0" y="0" width="900" height="70" fill="#4A1C17" opacity=".35"/>
-
-          <!-- window -->
-          <rect x="70" y="150" width="400" height="190" rx="4" fill="#2B1F19"/>
-          <rect x="82" y="162" width="376" height="166" fill="url(#glass)"/>
-          <rect x="82" y="162" width="376" height="166" fill="url(#glow)"/>
-          <path d="M270 162v166" stroke="#2B1F19" stroke-width="8"/>
-          <!-- plants on the sill -->
-          <g fill="#5E7C58">
-            <path d="M120 328c-18-30-6-62 12-74 6 30 4 52-12 74z"/>
-            <path d="M138 328c-4-28 12-52 34-58-2 28-14 48-34 58z"/>
-            <path d="M360 328c-14-34-4-66 20-80 2 34-4 58-20 80z"/>
-            <path d="M386 328c4-24 20-40 40-44-4 24-20 38-40 44z"/>
-            <path d="M330 328c-8-20-4-44 6-58 8 22 6 42-6 58z" fill="#738F6C"/>
-          </g>
-          <rect x="106" y="324" width="60" height="12" rx="3" fill="#3B2A20"/>
-          <rect x="334" y="324" width="80" height="12" rx="3" fill="#3B2A20"/>
-          <!-- window ledge -->
-          <rect x="60" y="340" width="420" height="12" fill="#B9A57C"/>
-
-          <!-- door -->
-          <rect x="560" y="150" width="190" height="248" rx="4" fill="#2B1F19"/>
-          <rect x="574" y="164" width="162" height="220" fill="url(#glass)"/>
-          <rect x="574" y="164" width="162" height="220" fill="url(#glow)"/>
-          <rect x="590" y="208" width="56" height="22" rx="4" fill="#C8302B"/>
-          <text x="618" y="224"text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="14" font-weight="600" fill="#FFF">OPEN</text>
-          <rect x="716" y="270" width="6" height="52" rx="3" fill="#B9A57C"/>
-
-          <!-- awning -->
-          <polygon points="50,86 850,86 888,150 12,150" fill="#E2CFA3"/>
-          <polygon points="50,86 850,86 856,96 44,96" fill="#EFE3C6"/>
-          <rect x="12" y="150" width="876" height="42" fill="#D6C08D"/>
-          <rect x="12" y="186" width="876" height="6" fill="#B9A57C"/>
-          <text x="450" y="182" text-anchor="middle" font-family="Caprasimo, Georgia, serif" font-size="34" fill="#4B2E1B">Coffee and Friends</text>
-
-          <!-- patio floor -->
-          <rect x="0" y="398" width="900" height="42" fill="#6E2C22"/>
-          <path d="M0 398h900" stroke="#3A130E" stroke-width="3"/>
-
-          <!-- patio: chairs and table -->
-          <use href="#chair" x="170" y="300" width="64" height="106"/>
-          <use href="#chair" x="300" y="300" width="64" height="106" transform="translate(664 0) scale(-1 1)" style="transform-box:fill-box"/>
-          <ellipse cx="270" cy="382" rx="52" ry="8" fill="#000" opacity=".18"/>
-          <rect x="266" y="360" width="8" height="30" fill="#2B1F19"/>
-          <ellipse cx="270" cy="360" rx="56" ry="9" fill="#E2CFA3"/>
-          <ellipse cx="270" cy="357" rx="56" ry="9" fill="#EFE3C6"/>
-          <!-- cup on table -->
-          <path d="M258 340h22v10a8 8 0 0 1-8 8h-6a8 8 0 0 1-8-8z" fill="#FFF8E8"/>
-          <path d="M280 343h4a4 4 0 0 1 0 8h-4" fill="none" stroke="#FFF8E8" stroke-width="3"/>
-
-          <use href="#chair" x="800" y="300" width="64" height="106"/>
-
-        </svg>
+  <section class="facts" aria-label="At a glance">
+    <div class="wrap facts-grid">
+      <div class="fact">
+        <h2>Where</h2>
+        <a href="https://www.google.com/maps/search/?api=1&query=Coffee+and+Friends+415+King+Street+Fredericton+NB" rel="noopener">415 King Street, downtown Fredericton</a>
       </div>
-
-      <div class="notes">
-        <div class="note">
-          <h3>The patio</h3>
-          <p>Red chairs out front on King Street, with room to linger when the weather behaves.</p>
-        </div>
-        <div class="note">
-          <h3>Inside</h3>
-          <p>Plants on the sills, a few aquarium fish, and music kept low enough to talk over.</p>
-        </div>
-        <div class="note">
-          <h3>At the back</h3>
-          <p>A pile of New Yorkers, free wifi, and a table for studying or catching up.</p>
-        </div>
-        <div class="note">
-          <h3>The roast</h3>
-          <p>Family-owned, with beans roasted in house and loose-leaf teas for anyone who'd rather.</p>
-        </div>
+      <div class="fact">
+        <h2>When</h2>
+        <p>Monday to Friday 7:30 am to 4:30 pm. Saturday 10 am to 4 pm.</p>
       </div>
-
-      <blockquote class="pull">
-        “Super bright and peaceful.” That's how one Fredericton local described it online, and we'll take it.
-        <cite>Fredericton locals, on Facebook</cite>
-      </blockquote>
+      <div class="fact">
+        <h2>Call</h2>
+        <a href="tel:+15064554554">(506) 455-4554</a>
+      </div>
+      <div class="fact">
+        <h2>Rated</h2>
+        <p>4.7 out of 5 on Google, from about 200 reviews</p>
+      </div>
     </div>
   </section>
 
-  <section class="menu" aria-labelledby="menu-h">
+  <section class="menu section-pad" id="menu" aria-labelledby="menu-h">
     <div class="wrap">
       <div class="menu-head">
-        <h2 id="menu-h">The menu</h2>
+        <h2 class="h-xl" id="menu-h">The menu</h2>
         <p>The board changes with the day. Ask at the counter for what's new.</p>
       </div>
 
@@ -422,32 +358,176 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-heig
     </div>
   </section>
 
-  <section class="visit light" id="visit" aria-labelledby="visit-h">
-    <div class="wrap visit-grid">
-      <div>
-        <h2 id="visit-h">Come by.</h2>
-        <p class="addr">
-          <a href="https://www.google.com/maps/search/?api=1&query=Coffee+and+Friends+415+King+Street+Fredericton+NB" rel="noopener">415 King Street</a><br>
-          Downtown Fredericton, NB
-        </p>
-        <p class="visit-note">Rated 4.7 out of 5 by about 200 people on Google. Bring a book, a laptop or a friend.</p>
-        <div class="hero-cta">
-          <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Coffee+and+Friends+415+King+Street+Fredericton+NB" rel="noopener">Get directions</a>
-          <a class="btn btn-line" href="tel:+15064554554">Call (506) 455-4554</a>
+  <section class="room light section-pad" id="room" aria-labelledby="room-h">
+    <div class="wrap">
+      <h2 class="h-xl" id="room-h">A calm room in the middle of downtown.</h2>
+
+      <div class="storefront">
+        <svg viewBox="0 0 900 440" role="img" aria-labelledby="sf-t sf-d" xmlns="http://www.w3.org/2000/svg">
+          <title id="sf-t">The Coffee and Friends storefront</title>
+          <desc id="sf-d">Illustration of a brick storefront with a tan awning, a front door, a window with plants, and red chairs and a table on the patio.</desc>
+          <defs>
+            <pattern id="brick" width="48" height="32" patternUnits="userSpaceOnUse">
+              <rect width="48" height="32" fill="#7A3025"/>
+              <path d="M0 .5h48M0 16.5h48M0 32.5h48M0 .5v16M24 16.5v16M48 .5v16" stroke="#4A1C17" stroke-width="2" fill="none" opacity=".7"/>
+            </pattern>
+            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#3C2B22"/>
+              <stop offset="1" stop-color="#1D1511"/>
+            </linearGradient>
+            <radialGradient id="glow" cx=".5" cy=".4" r=".7">
+              <stop offset="0" stop-color="#F2B66A" stop-opacity=".75"/>
+              <stop offset="1" stop-color="#F2B66A" stop-opacity="0"/>
+            </radialGradient>
+            <symbol id="chair" viewBox="0 0 60 100">
+              <g fill="#C8302B" stroke="#C8302B" stroke-linecap="round">
+                <rect x="8" y="2" width="44" height="30" rx="14" stroke="none"/>
+                <rect x="8" y="2" width="44" height="30" rx="14" fill="none" stroke="#9E221E" stroke-width="2"/>
+                <rect x="4" y="44" width="52" height="10" rx="5" stroke="none"/>
+                <path d="M14 54 L8 98 M46 54 L52 98 M18 54 L16 98 M42 54 L44 98" fill="none" stroke-width="4"/>
+                <path d="M12 30 L10 44 M48 30 L50 44" fill="none" stroke-width="4"/>
+              </g>
+              <g stroke="#9E221E" stroke-width="2" fill="none"><path d="M22 6v22M30 6v22M38 6v22"/></g>
+            </symbol>
+          </defs>
+
+          <rect width="900" height="440" fill="url(#brick)"/>
+          <rect x="0" y="0" width="900" height="70" fill="#4A1C17" opacity=".35"/>
+
+          <rect x="70" y="150" width="400" height="190" rx="4" fill="#2B1F19"/>
+          <rect x="82" y="162" width="376" height="166" fill="url(#glass)"/>
+          <rect x="82" y="162" width="376" height="166" fill="url(#glow)"/>
+          <path d="M270 162v166" stroke="#2B1F19" stroke-width="8"/>
+          <g fill="#5E7C58">
+            <path d="M120 328c-18-30-6-62 12-74 6 30 4 52-12 74z"/>
+            <path d="M138 328c-4-28 12-52 34-58-2 28-14 48-34 58z"/>
+            <path d="M360 328c-14-34-4-66 20-80 2 34-4 58-20 80z"/>
+            <path d="M386 328c4-24 20-40 40-44-4 24-20 38-40 44z"/>
+            <path d="M330 328c-8-20-4-44 6-58 8 22 6 42-6 58z" fill="#738F6C"/>
+          </g>
+          <rect x="106" y="324" width="60" height="12" rx="3" fill="#3B2A20"/>
+          <rect x="334" y="324" width="80" height="12" rx="3" fill="#3B2A20"/>
+          <rect x="60" y="340" width="420" height="12" fill="#B9A57C"/>
+
+          <rect x="560" y="150" width="190" height="248" rx="4" fill="#2B1F19"/>
+          <rect x="574" y="164" width="162" height="220" fill="url(#glass)"/>
+          <rect x="574" y="164" width="162" height="220" fill="url(#glow)"/>
+          <rect x="590" y="208" width="56" height="22" rx="4" fill="#C8302B"/>
+          <text x="618" y="224" text-anchor="middle" font-family="Newsreader, Georgia, serif" font-size="14" font-weight="600" fill="#FFF">OPEN</text>
+          <rect x="716" y="270" width="6" height="52" rx="3" fill="#B9A57C"/>
+
+          <polygon points="50,86 850,86 888,150 12,150" fill="#E2CFA3"/>
+          <polygon points="50,86 850,86 856,96 44,96" fill="#EFE3C6"/>
+          <rect x="12" y="150" width="876" height="42" fill="#D6C08D"/>
+          <rect x="12" y="186" width="876" height="6" fill="#B9A57C"/>
+          <text x="450" y="182" text-anchor="middle" font-family="Caprasimo, Georgia, serif" font-size="34" fill="#4B2E1B">Coffee and Friends</text>
+
+          <rect x="0" y="398" width="900" height="42" fill="#6E2C22"/>
+          <path d="M0 398h900" stroke="#3A130E" stroke-width="3"/>
+
+          <use href="#chair" x="170" y="300" width="64" height="106"/>
+          <use href="#chair" x="300" y="300" width="64" height="106" transform="translate(664 0) scale(-1 1)" style="transform-box:fill-box"/>
+          <ellipse cx="270" cy="382" rx="52" ry="8" fill="#000" opacity=".18"/>
+          <rect x="266" y="360" width="8" height="30" fill="#2B1F19"/>
+          <ellipse cx="270" cy="360" rx="56" ry="9" fill="#E2CFA3"/>
+          <ellipse cx="270" cy="357" rx="56" ry="9" fill="#EFE3C6"/>
+          <path d="M258 340h22v10a8 8 0 0 1-8 8h-6a8 8 0 0 1-8-8z" fill="#FFF8E8"/>
+          <path d="M280 343h4a4 4 0 0 1 0 8h-4" fill="none" stroke="#FFF8E8" stroke-width="3"/>
+
+          <use href="#chair" x="800" y="300" width="64" height="106"/>
+        </svg>
+      </div>
+
+      <div class="notes">
+        <div class="note">
+          <h3>The patio</h3>
+          <p>Red chairs out front on King Street, with room to linger when the weather behaves.</p>
+        </div>
+        <div class="note">
+          <h3>Inside</h3>
+          <p>Plants on the sills, a few aquarium fish, and music kept low enough to talk over.</p>
+        </div>
+        <div class="note">
+          <h3>At the back</h3>
+          <p>A pile of New Yorkers, free wifi, and a table for studying or catching up.</p>
+        </div>
+        <div class="note">
+          <h3>The roast</h3>
+          <p>Family-owned, with beans roasted in house and loose-leaf teas for anyone who'd rather.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews section-pad" id="reviews" aria-labelledby="reviews-h">
+    <div class="wrap">
+      <div class="reviews-head">
+        <h2 class="h-xl" id="reviews-h">What people say</h2>
+        <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span>4.7 out of 5 on Google, from about 200 reviews</p>
+      </div>
+
+      <div class="reviews-grid">
+        <figure class="quote quote-big">
+          <blockquote>“…you would be hard pressed to find a higher quality of coffee.”</blockquote>
+          <figcaption><cite>A Restaurantji reviewer</cite></figcaption>
+        </figure>
+
+        <div class="quote-list">
+          <figure class="quote">
+            <blockquote>“This is my favourite cafe in town.”</blockquote>
+            <figcaption><cite>A Restaurantji reviewer</cite></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>“Perfect space to get work done quietly!”</blockquote>
+            <figcaption><cite>A Restaurantji reviewer</cite></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>“Good coffee, quiet music, a pile of New Yorker magazines at the back, lovely owners.”</blockquote>
+            <figcaption><cite>A Fredericton local, on Facebook</cite></figcaption>
+          </figure>
         </div>
       </div>
 
-      <div>
-        <ul class="hours" id="hours">
-          <li data-day="1"><span>Monday</span><span>7:30 am to 4:30 pm</span></li>
-          <li data-day="2"><span>Tuesday</span><span>7:30 am to 4:30 pm</span></li>
-          <li data-day="3"><span>Wednesday</span><span>7:30 am to 4:30 pm</span></li>
-          <li data-day="4"><span>Thursday</span><span>7:30 am to 4:30 pm</span></li>
-          <li data-day="5"><span>Friday</span><span>7:30 am to 4:30 pm</span></li>
-          <li data-day="6"><span>Saturday</span><span>10 am to 4 pm</span></li>
-          <li data-day="0"><span>Sunday</span><span>Closed</span></li>
-        </ul>
-        <p class="hours-note">Hours vary between online listings. Call before a long trip.</p>
+      <p class="more">
+        <span>Read more reviews on</span>
+        <a href="https://www.google.com/maps/search/?api=1&query=Coffee+and+Friends+415+King+Street+Fredericton+NB" rel="noopener">Google</a>
+        <a href="https://www.yelp.ca/biz/coffee-and-friends-fredericton" rel="noopener">Yelp</a>
+        <a href="https://www.restaurantji.com/nb/fredericton/coffee-and-friends-/" rel="noopener">Restaurantji</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="visit light section-pad" id="visit" aria-labelledby="visit-h">
+    <div class="wrap">
+      <div class="visit-grid">
+        <div>
+          <h2 class="h-xl" id="visit-h">Come by.</h2>
+          <p class="addr">
+            <a href="https://www.google.com/maps/search/?api=1&query=Coffee+and+Friends+415+King+Street+Fredericton+NB" rel="noopener">415 King Street</a><br>
+            Downtown Fredericton, NB
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&query=Coffee+and+Friends+415+King+Street+Fredericton+NB" rel="noopener">Get directions</a>
+            <a class="btn btn-line" href="tel:+15064554554">Call (506) 455-4554</a>
+          </div>
+        </div>
+
+        <div>
+          <ul class="hours" id="hours">
+            <li data-day="1"><span>Monday</span><span>7:30 am to 4:30 pm</span></li>
+            <li data-day="2"><span>Tuesday</span><span>7:30 am to 4:30 pm</span></li>
+            <li data-day="3"><span>Wednesday</span><span>7:30 am to 4:30 pm</span></li>
+            <li data-day="4"><span>Thursday</span><span>7:30 am to 4:30 pm</span></li>
+            <li data-day="5"><span>Friday</span><span>7:30 am to 4:30 pm</span></li>
+            <li data-day="6"><span>Saturday</span><span>10 am to 4 pm</span></li>
+            <li data-day="0"><span>Sunday</span><span>Closed</span></li>
+          </ul>
+          <p class="hours-note">Hours vary between online listings. Call before a long trip.</p>
+        </div>
+      </div>
+
+      <div class="map">
+        <iframe title="Map showing Coffee and Friends at 415 King Street, Fredericton" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Coffee+and+Friends+415+King+Street+Fredericton+NB&amp;output=embed"></iframe>
       </div>
     </div>
   </section>
@@ -455,8 +535,29 @@ h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-heig
 
 <footer class="foot">
   <div class="wrap">
-    <a class="mark" href="#top">Coffee and Friends</a>
-    <p>415 King Street, Fredericton, NB E3B 1E5</p>
+    <div class="foot-grid">
+      <div>
+        <a class="mark" href="#top">Coffee and Friends</a>
+        <p class="foot-note">415 King Street, Fredericton, NB E3B 1E5<br>Family-owned. Closed Sundays.</p>
+      </div>
+      <div>
+        <h2>Find us online</h2>
+        <ul>
+          <li><a href="https://www.facebook.com/pages/Coffee-And-Friends/175521545839236" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Coffee+and+Friends+415+King+Street+Fredericton+NB" rel="noopener">Google Maps</a></li>
+          <li><a href="https://www.yelp.ca/biz/coffee-and-friends-fredericton" rel="noopener">Yelp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Get in touch</h2>
+        <ul>
+          <li><a href="tel:+15064554554">(506) 455-4554</a></li>
+          <li><a href="#visit">Hours and directions</a></li>
+          <li><a href="#menu">Menu</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-fine">Reviews are short excerpts from public review sites. Hours and menu are as listed online and may change.</p>
   </div>
 </footer>
 
